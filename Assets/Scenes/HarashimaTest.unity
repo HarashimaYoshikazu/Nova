@@ -988,10 +988,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff514f7325df394cb03f2087ad267bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _currentSpeed: 5
   _walkSpeed: 5
   _dashSpeed: 8
-  _gravity: 100
+  _initGravity: 100
 --- !u!136 &1636687085
 CapsuleCollider:
   m_ObjectHideFlags: 0

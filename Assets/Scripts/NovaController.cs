@@ -11,14 +11,15 @@ public class NovaController : MonoBehaviour
 
     //パラメータ
     [Header("プレイヤーの移動スピード"), SerializeField]
-    float _speed = 5f;
+    float _currentSpeed = 5f;
     [Header("通常時のスピード"), SerializeField]
     float _walkSpeed = 5f;
     [Header("ダッシュ時のスピード"), SerializeField]
     float _dashSpeed = 10f;
 
     [Header("プレイヤーの移動時に下にかかる力"), SerializeField]
-    float _gravity = 30f;
+    float _initGravity = 30f;
+    float _currentGravity = 0f;
 
     float _hor = 0f;
     float _ver = 0f;
@@ -32,6 +33,7 @@ public class NovaController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        Jump();
     }
     private void Move()
     {
@@ -41,12 +43,12 @@ public class NovaController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             _anim.SetBool("IsDash",true );
-            _speed = _dashSpeed;
+            _currentSpeed = _dashSpeed;
         }
         else
         {
             _anim.SetBool("IsDash", false);
-            _speed = _walkSpeed;
+            _currentSpeed = _walkSpeed;
         }
         
 
@@ -56,15 +58,28 @@ public class NovaController : MonoBehaviour
             _rigidBody.velocity = new Vector3(0, _rigidBody.velocity.y, 0);
         }
         else
-        {
+        {           
             // カメラを基準に入力が上下=奥/手前, 左右=左右にキャラクターを向ける
             dir = Camera.main.transform.TransformDirection(dir);    // メインカメラを基準に入力方向のベクトルを変換する // y 軸方向はゼロにして水平方向のベクトルにする // そのベクトルの方向にオブジェクトを向ける
 
             dir.y = 0;
             this.transform.forward = dir;
             // 前方に移動する。ジャンプした時の y 軸方向の速度は保持する
-            _rigidBody.velocity = dir * _speed;
+            _rigidBody.velocity = dir * _currentSpeed;
         }
-        _rigidBody.AddForce(new Vector3(0, -_gravity, 0), ForceMode.Force);
+        _rigidBody.AddForce(new Vector3(0, -_currentGravity, 0), ForceMode.Force);
+    }
+
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            _currentGravity = 0f;
+            _anim.SetTrigger("Jump");
+        }
+        else
+        {
+            _currentGravity = _initGravity;
+        }
     }
 }
