@@ -12,6 +12,13 @@ public class NovaController : MonoBehaviour
     //パラメータ
     [Header("プレイヤーの移動スピード"), SerializeField]
     float _speed = 5f;
+    [Header("通常時のスピード"), SerializeField]
+    float _walkSpeed = 5f;
+    [Header("ダッシュ時のスピード"), SerializeField]
+    float _dashSpeed = 10f;
+
+    [Header("プレイヤーの移動時に下にかかる力"), SerializeField]
+    float _gravity = 30f;
 
     float _hor = 0f;
     float _ver = 0f;
@@ -31,11 +38,22 @@ public class NovaController : MonoBehaviour
         _hor = Input.GetAxisRaw("Horizontal");
         _ver = Input.GetAxisRaw("Vertical");
         _anim.SetBool("IsWalk", Mathf.Abs(_ver) > 0.1f || Mathf.Abs(_hor) > 0.1f);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _anim.SetBool("IsDash",true );
+            _speed = _dashSpeed;
+        }
+        else
+        {
+            _anim.SetBool("IsDash", false);
+            _speed = _walkSpeed;
+        }
+        
 
         Vector3 dir = Vector3.forward * _ver + Vector3.right * _hor;
         if (dir == Vector3.zero)
         {
-            _rigidBody.velocity = new Vector3(0,_rigidBody.velocity.y, 0);
+            _rigidBody.velocity = new Vector3(0, _rigidBody.velocity.y, 0);
         }
         else
         {
@@ -47,6 +65,6 @@ public class NovaController : MonoBehaviour
             // 前方に移動する。ジャンプした時の y 軸方向の速度は保持する
             _rigidBody.velocity = dir * _speed;
         }
-        _rigidBody.AddForce(new Vector3(0,-100f,0),ForceMode.Force);
+        _rigidBody.AddForce(new Vector3(0, -_gravity, 0), ForceMode.Force);
     }
 }
