@@ -34,6 +34,10 @@ public class NovaController : MonoBehaviour
     {
         Move();
         Jump();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attack();
+        }
     }
     private void Move()
     {
