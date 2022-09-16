@@ -43,18 +43,21 @@ public class NovaController : MonoBehaviour
     {
         _hor = Input.GetAxisRaw("Horizontal");
         _ver = Input.GetAxisRaw("Vertical");
-        _anim.SetBool("IsWalk", Mathf.Abs(_ver) > 0.1f || Mathf.Abs(_hor) > 0.1f);
+        //_anim.SetBool("IsWalk", Mathf.Abs(_ver) > 0.1f || Mathf.Abs(_hor) > 0.1f);
+        _anim.SetBool("IsWalk", _currentSpeed == _walkSpeed && (Mathf.Abs(_ver) > 0.1f || Mathf.Abs(_hor) > 0.1f));
+        _anim.SetBool("IsDash", _currentSpeed ==_dashSpeed);
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            _anim.SetBool("IsDash",true );
+            //_anim.SetBool("IsDash",true );
             _currentSpeed = _dashSpeed;
+            Debug.Log("走ってます！");
         }
         else
         {
             _anim.SetBool("IsDash", false);
             _currentSpeed = _walkSpeed;
+            Debug.Log("走ってないです！");
         }
-        
 
         Vector3 dir = Vector3.forward * _ver + Vector3.right * _hor;
         if (dir == Vector3.zero)
