@@ -172,6 +172,19 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-3856939406594323220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87aec802f5829d74c999346630961523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resetTriggerName: Jump
 --- !u!1102 &-3849033527529334287
 AnimatorState:
   serializedVersion: 5
@@ -186,7 +199,8 @@ AnimatorState:
   - {fileID: 882912353466053088}
   - {fileID: -6111452171116925762}
   - {fileID: 429446895523595214}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -3856939406594323220}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -573,9 +587,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.40074986
+  m_TransitionDuration: 0.65758306
   m_TransitionOffset: 0
-  m_ExitTime: 0.59925014
+  m_ExitTime: 0.3424169
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
