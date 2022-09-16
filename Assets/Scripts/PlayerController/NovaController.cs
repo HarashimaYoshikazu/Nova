@@ -82,4 +82,9 @@ public class NovaController : MonoBehaviour
             _currentGravity = _initGravity;
         }
     }
+
+    public void Attack()
+    {
+        _anim.SetTrigger("AttackTrigger");
+    }
 }
