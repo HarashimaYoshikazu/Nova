@@ -25,7 +25,10 @@ public class NovaAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            StartCoroutine(AttackColider());
+            if (_attackCollider)
+            {
+                StartCoroutine(AttackColider());
+            }         
             _animator.SetTrigger("AttackTrigger");
         }
     }
