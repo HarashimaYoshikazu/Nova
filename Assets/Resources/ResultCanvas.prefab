@@ -312,6 +312,7 @@ MonoBehaviour:
   _panel: {fileID: 3684760413616168816}
   _text: {fileID: 3684760414039117726}
   _restartButton: {fileID: 3684760412749981042}
+  _sceneName: Harashima_Develop
 --- !u!1 &3684760413616168816
 GameObject:
   m_ObjectHideFlags: 0

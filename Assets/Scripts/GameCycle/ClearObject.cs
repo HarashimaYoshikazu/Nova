@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class ClearObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    ResultPanel _resultPanel = default;
+    [SerializeField]
+    string _cleatText;
+
+    private void Awake()
     {
-        
+        _resultPanel = FindObjectOfType<ResultPanel>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            _resultPanel.Init(_cleatText);
+        }
     }
 }

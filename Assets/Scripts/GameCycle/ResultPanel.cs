@@ -6,20 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class ResultPanel : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField,Header("リザルト時にアクティブになるパネル")]
     GameObject _panel;
 
-    [SerializeField]
+    [SerializeField, Header("リザルト状態を表すテキスト")]
     Text _text;
 
-    [SerializeField]
+    [SerializeField, Header("シーンを読み込むボタン")]
     Button _restartButton;
+
+    [SerializeField, Header("読み込むシーン名")]
+    string _sceneName;
 
     private void Awake()
     {
         _restartButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(_sceneName);
         });
     }
 
