@@ -9,6 +9,9 @@ public class NovaAttack : MonoBehaviour
     [SerializeField, Header("敵に与えるダメージ")]
     int _attack = 1;
     public int GetAttack => _attack;
+
+    [SerializeField, Header("攻撃時の当たり判定")]
+    Collider _attackCollider = default;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -22,7 +25,14 @@ public class NovaAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            StartCoroutine(AttackColider());
             _animator.SetTrigger("AttackTrigger");
         }
+    }
+    IEnumerator AttackColider()
+    {
+        _attackCollider.gameObject?.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        _attackCollider.gameObject?.SetActive(false);
     }
 }
