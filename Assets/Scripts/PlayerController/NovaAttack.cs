@@ -6,7 +6,9 @@ using UnityEngine;
 public class NovaAttack : MonoBehaviour
 {
     Animator _animator = default;
-
+    [SerializeField, Header("敵に与えるダメージ")]
+    int _attack = 1;
+    public int GetAttack => _attack;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
